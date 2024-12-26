@@ -14,8 +14,8 @@
 plot_workload <- function(ath, data){
 
   ## ---- Data management ---- ##
-  data <- data %>% filter(id == ath)
-  data <- data %>% filter(
+  data <- data %>% dplyr::filter(id == ath)
+  data <- data %>% dplyr::filter(
     date > data$date[min(which(!is.na(data$load)))] &
       date < data$date[max(which(!is.na(data$load)))]
   ) %>% mutate(date = as.Date(date))
@@ -58,8 +58,8 @@ plot_workload <- function(ath, data){
 plot_state <- function(ath, data, n_state){
 
   ## ---- Data management ---- ##
-  data <- data %>% filter(id == ath)
-  data <- data %>% filter(
+  data <- data %>% dplyr::filter(id == ath)
+  data <- data %>% dplyr::filter(
     date > data$date[min(which(!is.na(data$load)))] &
       date < data$date[max(which(!is.na(data$load)))]
   ) %>% mutate(date = as.Date(date))
@@ -230,7 +230,7 @@ emils <- function(result){
         on.exit(progress$close())
         progress$set(message = "Importation des donnees", detail = "Patientez un instant...", value = 0.5)
 
-        r$data <- result$result %>% filter(id == input$athlete)
+        r$data <- result$result %>% dplyr::filter(id == input$athlete)
 
         shinyjs::show("body")
         progress$inc(1, detail = "Termine")
