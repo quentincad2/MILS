@@ -7,17 +7,30 @@ Authors@R:
            role = c("aut", "cre"),
            email = "quentin.delarochelambert@insep.fr",
            comment = c(ORCID = "0000-0001-8049-7069")),
-    person(given = "Thomas",
-           family = "Cassart",
+    person(given = "Kilian",
+           family = "Barlier",
            role = "aut",
-           email = "tom.chassard@insep.fr",
-           comment = c(ORCID = "0000-0002-4035-0289")))
+           email = "kilian.barlier@grand-insep.fr"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports:
   zoo,
-  TTR
+  TTR,
+  R6,
+  depmixS4,
+  igraph,
+  dplyr,
+  ggplot2,
+  gridExtra,
+  reshape2,
+  data.table,
+  stats,
+  tidyr,
+  plotly,
+  scales,
+  shiny,
+  shinyWidgets,
+  shinyjs

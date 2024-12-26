@@ -40,9 +40,9 @@ redi(
 
 \item{keep}{pas encore en place}
 
-\item{rpeload}{variable indiquant la rpeSession si FOSTER=TRUE}
+\item{FOSTER}{calcul les indicateurs de FOSTER}
 
-\item{FORSTER}{calcul les indicateurs de FOSTER}
+\item{rpeload}{variable indiquant la rpeSession si FOSTER=TRUE}
 }
 \value{
 un data.frame avec les différents indicateurs de charge

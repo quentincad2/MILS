@@ -12,8 +12,12 @@
 #' @param formatdate format des dates
 #' @param replace me rappelle plus
 #' @param keep pas encore en place
-#' @param FORSTER calcul les indicateurs de FOSTER
+#' @param FOSTER calcul les indicateurs de FOSTER
 #' @param rpeload variable indiquant la rpeSession si FOSTER=TRUE
+#'
+#' @import stats
+#' @import zoo
+#' @import TTR
 
 
 
