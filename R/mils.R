@@ -58,9 +58,9 @@ mils <- function(data, n_obs = 2, n_states = 3, family = "gaussian", init = FALS
 
   # Remove athletes with insufficient data
   n <- df %>% group_by(id) %>% count()
-  ath <- n %>% filter(n <= n_obs)
+  ath <- n %>% dplyr::filter(n <= n_obs)
   if (nrow(ath) > 0) {
-    df <- df %>% filter(!id %in% ath$id)
+    df <- df %>% dplyr::filter(!id %in% ath$id)
   }
 
   # ---- Model Setup ---- #
