@@ -76,3 +76,27 @@ Load <- R6Class(
     }
   )
 )
+
+
+# ---- Principal Class ---- #
+#' @title Feature Class
+#' @description R6 class representing a feature with raw and processed data.
+Features <- R6Class(
+  classname = "Feature",
+  public = list(
+    data_raw = NULL,
+    data_processed = NULL,
+    index = c("index", "id"),
+
+    # ---- Initialization ---- #
+    initialize = function(data_raw = data.frame(), data_processed = data.frame()) {
+      self$data_raw <- data_raw
+      self$data_processed <- data_processed
+    },
+
+    # ---- Get the Data ---- #
+    get_data = function(data) {
+      self$data_raw <- data
+    }
+  )
+)

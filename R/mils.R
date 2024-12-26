@@ -23,13 +23,14 @@
 #' @examples NULL
 mils <- function(data, n_obs = 2, n_states = 3, family = "gaussian", init = FALSE, state_name = NULL) {
 
+  colnames(data) <- c("id", "date", "load")
+
   # Default state names
   if (is.null(state_name)) {
     state_name <- paste0("S", 1:n_states)
   }
 
   # ---- Data Preprocessing ---- #
-  colnames(data) <- c("id", "date", "load")
   data <- add_missing_days(data)
 
   data <- data %>%
@@ -119,7 +120,7 @@ mils <- function(data, n_obs = 2, n_states = 3, family = "gaussian", init = FALS
   links <- melt(result$trans)
   names(links) <- c("from", "to", "weight")
   nodes <- data.frame(
-    id = state_name,
+    id = c(1:length(state_name)),
     etat = state_name
   )
   p2 <- plot_trans(links, nodes, emiss)
@@ -136,11 +137,14 @@ mils <- function(data, n_obs = 2, n_states = 3, family = "gaussian", init = FALS
     )
   }
 
+  res=cbind(df,model@posterior)
+
   return(
     list(
       model = model,
       data_process = df,
-      plot = p
+      plot = p,
+      result=res
     )
   )
 }

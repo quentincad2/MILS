@@ -99,7 +99,53 @@ plot_state <- function(ath, data, n_state){
 }
 
 
+#' bs4Dash box
+#'
+#' Function creating a bs4Dash box.
+#'
+#' @param ... bs4Dash box arguments.
+#' @param title a title.
+#' @param width the width of the box (12 by default).
+#' @param collapsible boolean. If TRUE, display a button in the upper right that allows the user to collapse the box (TRUE by default).
+#' @param maximizable boolean. If TRUE, the card can be displayed in full screen mode (TRUE by default).
+#' @param closable boolean.	If TRUE, display a button in the upper right that allows the user to close the box (FALSE by default).
+#'
+#' @return my_box() returns a HTML object.
+#'
+#' @importFrom shiny tagList
+#' @importFrom bs4Dash box
+#' @export
+my_box <- function(..., title, width = 12, collapsible = TRUE, maximizable = TRUE, closable = FALSE){
 
+  tagList(
+    bs4Dash::box(..., title = title, width = width, collapsible = collapsible, maximizable = maximizable, closable = closable),
+    bs4Dash_deps
+  )
+}
+
+#' Import bs4Dash dependencies
+#'
+#' HMTL object containing all bs4Dash dependencies.
+#'
+#' @return bs4Dash_ui is a HTML object.
+#'
+#' @importFrom bs4Dash dashboardPage dashboardHeader dashboardSidebar dashboardBody
+#' @export
+bs4Dash_ui <- bs4Dash::dashboardPage(
+
+  bs4Dash::dashboardHeader(),
+  bs4Dash::dashboardSidebar(),
+  bs4Dash::dashboardBody()
+)
+#' Get bs4Dash dependencies
+#'
+#' List containing all bs4Dash dependencies.
+#'
+#' @return bs4Dash_deps is a list of html_dependency.
+#'
+#' @importFrom htmltools findDependencies
+#' @export
+bs4Dash_deps <- htmltools::findDependencies(bs4Dash_ui)
 
 ## ------------------------------------------------- ##
 ## ------------------- Shiny app ------------------- ##
@@ -150,7 +196,6 @@ emils <- function(result){
           )
         )
       )
-
     )
   )
 
@@ -163,7 +208,7 @@ emils <- function(result){
 
     ## ---- Update input ---- ##
     observe({
-      indiv <- unique(result$data$id)
+      indiv <- unique(result$result$id)
       updateSelectizeInput(
         inputId = "athlete",
         choices = indiv,
@@ -185,7 +230,7 @@ emils <- function(result){
         on.exit(progress$close())
         progress$set(message = "Importation des donnees", detail = "Patientez un instant...", value = 0.5)
 
-        r$data <- result$data %>% filter(id == input$athlete)
+        r$data <- result$result %>% filter(id == input$athlete)
 
         shinyjs::show("body")
         progress$inc(1, detail = "Termine")
@@ -194,13 +239,13 @@ emils <- function(result){
 
     ## ---- Plot ---- ##
     output$workload <- renderPlotly({
-      p <- plot_workload(input$athlete, result$data)
+      p <- plot_workload(input$athlete, result$result)
 
       ggplotly(p, tooltip = "text")
     })
 
     output$state <- renderPlotly({
-      p <- plot_state(input$athlete, result$data, length(unique(result$data$state)))
+      p <- plot_state(input$athlete, result$result, length(unique(result$result$state)))
 
       ggplotly(p, tooltip = "text")
     })
