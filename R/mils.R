@@ -1,4 +1,4 @@
-#' @title MILS (Multivariate Individual Load State)
+#' @title MILS (Markov Index Load State)
 #' @description Fits a hidden Markov model to analyze individual workload states.
 #' @param data A data frame with columns: id (athlete ID), date, and load.
 #' @param n_obs Integer. Minimum number of observations required per athlete. Default is 2.

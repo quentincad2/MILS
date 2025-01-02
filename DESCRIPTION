@@ -1,5 +1,5 @@
 Package: MILS
-Title: Analyse de la charge de travail
+Title: Estimatiation de la réponse à la charge de travail par Chaine de Markov Cachées
 Version: 0.0.0.9000
 Authors@R:
     c(person(given = "Quentin",
@@ -11,7 +11,7 @@ Authors@R:
            family = "Barlier",
            role = "aut",
            email = "kilian.barlier@grand-insep.fr"))
-Description: What the package does (one paragraph).
+Description: Estime des états de fatigue en fonction de la charge de travail de travail effectuée
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
